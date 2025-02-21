@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let message = document.createElement("div");
         message.innerHTML = `
             <h2 style="margin-bottom: 15px;">Open in Browser</h2>
-            <p style="margin-bottom: 20px;">For best experience, please open this page in Chrome, Safari, Firefox, or Edge.</p>
+            <p style="margin-bottom: 20px;">For best experience, please open this page in Chrome, Safari, Firefox, or Edge. Tap the Open in Browser button, then OPEN LINK VIA BROWSER.</p>
         `;
 
         let button = document.createElement("button");
