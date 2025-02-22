@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
         copyLink.innerText = window.location.href;
         copyLink.onclick = function () {
             navigator.clipboard.writeText(window.location.href);
-            alert("Link copied! Open Safari and paste the link and proceed with the payment.");
+            alert("Link copied! Open Safari, paste the link and proceed with the payment.");
         };
 
         let closeButton = document.createElement("button");
