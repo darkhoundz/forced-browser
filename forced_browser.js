@@ -3,7 +3,6 @@
 	https://facebook.com/mr.partingtime
 */
 
-
 document.addEventListener("DOMContentLoaded", function () {
     function isInMiniBrowser() {
         const ua = navigator.userAgent.toLowerCase();
@@ -15,18 +14,14 @@ document.addEventListener("DOMContentLoaded", function () {
             ua.includes("snapchat") ||
             ua.includes("line") ||
             ua.includes("wechat") ||
-            ua.includes("tiktok")
+            ua.includes("tiktok")  
         );
     }
 
     function openInBrowser() {
         const url = window.location.href;
-
         if (navigator.userAgent.match(/(iPhone|iPad|iPod)/i)) {
-            window.location = `googlechrome://${url.replace(/^https?:\/\//, "")}`;
-            setTimeout(() => {
-                window.location = `https://${url.replace(/^https?:\/\//, "")}`; 
-            }, 500);
+            alert("Please copy and open this link in Safari manually: " + url);
         } else if (navigator.userAgent.match(/android/i)) {
             window.location = `googlechrome://${url.replace(/^https?:\/\//, "")}`;
             setTimeout(() => {
@@ -50,21 +45,28 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (isInMiniBrowser()) {
-        // Create a popup container
         let popup = document.createElement("div");
         popup.id = "browserPopup";
-        popup.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); display:flex; justify-content:center; align-items:center; flex-direction:column; color:white; text-align:center; z-index:9999;";
+        popup.style = "position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); display:flex; justify-content:center; align-items:center; flex-direction:column; color:white; text-align:center; z-index:9999; padding:20px;";
 
         let message = document.createElement("div");
         message.innerHTML = `
             <h2 style="margin-bottom: 15px;">Open in Browser</h2>
-            <p style="margin-bottom: 20px;">For best experience, please open this page in Chrome, Safari, Firefox, or Edge. Tap the Open in Browser button, then OPEN LINK VIA BROWSER.</p>
+            <p style="margin-bottom: 20px;">For best experience, please open this page in Chrome, Safari, Firefox, or Edge. Tap the "Open in Browser" button, then, "CONTINUE ANYWAY VIA BROWSER".</p>
         `;
 
         let button = document.createElement("button");
         button.innerText = "Open in Browser";
         button.style = "padding:10px 20px; background:#007bff; color:white; font-size:16px; border:none; border-radius:5px; cursor:pointer;";
         button.onclick = openInBrowser;
+
+        let copyLink = document.createElement("p");
+        copyLink.style = "margin-top:10px; padding:10px; background:white; color:black; border-radius:5px; word-break:break-all; font-size:14px; cursor:pointer;";
+        copyLink.innerText = window.location.href;
+        copyLink.onclick = function () {
+            navigator.clipboard.writeText(window.location.href);
+            alert("Link copied! Open Safari and paste the link and proceed with the payment.");
+        };
 
         let closeButton = document.createElement("button");
         closeButton.innerText = "Close";
@@ -75,7 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         popup.appendChild(message);
         popup.appendChild(button);
+        popup.appendChild(copyLink);
         popup.appendChild(closeButton);
         document.body.appendChild(popup);
     }
 });
+
